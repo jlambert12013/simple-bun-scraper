@@ -6,12 +6,16 @@ async function scrape(url: string) {
   return html
 }
 
-async function parse(element: string) {
-  const result = await scrape('https://google.com')
+async function parse(url: string, element: string) {
+  const result = await scrape(url)
   const $ = cheerio.load(result)
   const html = $.html(element)
   console.log(html)
 }
 
-const parsed = await parse('a')
-console.log(parsed)
+async function start(url: string, element: string) {
+  const parsed = await parse(url, element)
+  console.log(parsed)
+}
+
+await start('http://google.com', 'a')
